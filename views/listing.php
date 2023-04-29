@@ -91,6 +91,7 @@ function myFunctionDelete(id) {
 setTimeout(function() {
     window.close();
 }, 5000);
+
 </script>
 </body>
 </html>

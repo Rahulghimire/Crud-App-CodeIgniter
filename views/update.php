@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="<?php echo base_url().'assets/js/bootstrap.min.js';?>">
     <link rel="stylesheet" href="<?php echo base_url().'assets/jquery-3.6.4.js';?>">
 
-    <!-- STYLES -->
-
     <style {csp-style-nonce}>
         * {
             transition: background-color 300ms ease, color 300ms ease;
@@ -45,12 +43,13 @@
 <section class="form">
 
 <form  action="<?php echo base_url().'index.php/User/update/'.$user['id'];?>" class="form" method="post">
+
   <div class="form-group">
     <label for="exampleInputEmail1">Enter Name</label>
     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Full Name" name="name" value="<?php echo set_value('name',$user['name']); ?>">
     <small id="nameHelp" class="form-text text-danger"><?php echo form_error('name')?></small>
-  
   </div>
+
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="john@example.com" name="email" value="<?php echo set_value('email',$user['email']); ?>">

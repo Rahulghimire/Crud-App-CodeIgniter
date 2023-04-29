@@ -10,7 +10,7 @@ class User_model extends CI_model{
     }
 
     function getUser($userId){
-        $this->db->where('id',$userId);
+    $this->db->where('id',$userId);
        return $this->db->get('users')->row_array();
     }
 
@@ -24,5 +24,16 @@ class User_model extends CI_model{
         //delete from the users
         $this->db->delete('users');
     }
+    
+    function getProfileUser($userId){
+        $this->db->where('id',$userId);
+        return $this->db->get('user_reg')->row_array();
+    }
+
+    function updateProfileUser($id,$formArray){
+        $this->db->where('id',$id);
+        $this->db->update('user_reg',$formArray); //update users set name=?, where id=?
+    }
+    
 }
 ?>

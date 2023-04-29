@@ -29,12 +29,16 @@ class LoginController extends CI_controller{
             $this->session->set_flashdata('status','Invalid Username or Password');
             $this->index();
         }
-
+        
         else{
             $auth_userdetails=[
+                'id'=>$result->id,
                 'name'=>$result->name,
-                'email'=>$result->email
+                'email'=>$result->email,
+                'password'=>$result->password
             ];
+
+            //echo $auth_userdetails;
             
             $this->session->set_userdata("authenticated",$result->role_as);
             $this->session->set_userdata("auth_user",$auth_userdetails);
@@ -42,4 +46,5 @@ class LoginController extends CI_controller{
         }
     }
 }
+
 }

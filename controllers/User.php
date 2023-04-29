@@ -60,7 +60,7 @@ class User extends CI_Controller {
 		$data['user']=$user;
 		//var_dump($data);
 
-		$this->form_validation->set_rules('name',"Name","required|min_length[5]|max_length[50]");
+		$this->form_validation->set_rules('name',"Name","required|trim|min_length[5]|max_length[50]");
 		$this->form_validation->set_rules('email',"Email","required|valid_email");
 		$this->form_validation->set_rules('phone',"Phone","required|min_length[10]|max_length[15]|regex_match[/^[0-9]+$/]");
 		$this->form_validation->set_rules('province',"Province","required");
@@ -101,4 +101,76 @@ class User extends CI_Controller {
 			redirect(base_url().'index.php/User/index');
 		}
 	}
+
+	//handle profile function
+
+	public function profile(){
+		$this->load->view("profile");
+	}
+
+	public function userEditHandler(){
+	$this->load->view("profileEdit");
+	
+	}
+
+	public function handleProfileUpdate($userId){
+
+		// echo $userId;
+
+		$this->load->model("UserRegModel");
+		$this->load->model("User_model");
+
+		$user=$this->User_model->getProfileUser($userId);
+
+		//var_dump($user);
+		
+	
+		$data=array();
+
+		$data['user']=$user;
+
+		//var_dump($data);
+
+
+		$this->form_validation->set_rules('name','Name','trim|required|min_length[5]|max_length[20]');
+        $this->form_validation->set_rules('email','Email','trim|required');
+        $this->form_validation->set_rules('password','Password','trim|required');
+        $this->form_validation->set_rules('npassword','Password','trim|required');
+
+
+		if($this->form_validation->run()===false){
+			$this->load->view("profileEdit",$data);
+		}
+		
+		else{
+	
+		$data=array(
+			'email'=>$this->input->post('email'),
+			'password'=>md5($this->input->post("password"))
+		);
+
+		//var_dump($data);
+
+		$result=$this->UserRegModel->loginUser($data);
+	
+		//var_dump($result);
+
+		if(!$result){
+            $this->session->set_flashdata('status','Invalid Username or Password');
+        }
+
+		else{
+		$formArray['name']=$this->input->post('name');
+		$formArray['email']=$this->input->post('email');
+		$formArray['password']=md5($this->input->post('npassword'));
+		
+		$this->User_model->updateProfileUser($userId,$formArray);
+		$this->session->set_flashdata("success","Records Updated Successfully, Login Again With New Password");
+		redirect(base_url().'index.php/Auth/LoginController/login');
+		}
+		
+		}
+
+	}
+	
 }

@@ -28,17 +28,23 @@
 </head>
 
 <body>
-    <section class="add-button">
+    <section class="add-button d-flex align-items-center">
     <form action="<?php echo base_url().'index.php/User/insert'?>">
     <input type="submit" value="Add User +" class="btn btn-outline-success">
     </form>
-        <?php 
+<div>
+<?php 
         $auth_user = $this->session->userdata('auth_user');
         if($auth_user){
-        echo '<div class="username text-primary">' .$auth_user['name'] . '</div>';
+        echo '<a class="username text-primary mx-0 px-0 text-decoration-none" id="profile" href="<?php echo base_url()?>">' .$auth_user['name'] . '</a>';
         }?>
-        
     <a href="<?php echo base_url().'index.php/Auth/LogoutController/logout'?>" class="btn btn-primary logout">Logout</a>  
+</div>
+   
     </section>
 </body>
+<script>
+const profile=document.getElementById("profile");
+profile.setAttribute("href","<?php echo base_url()?>index.php/User/profile/index");
+</script>
 </html>

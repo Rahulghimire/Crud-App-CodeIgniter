@@ -62,8 +62,7 @@
                   <div class="pt-1 mb-2">
                     <button class="btn btn-dark btn-lg btn-block" type="submit">Sign Up</button>
                   </div>
-
-                  <a class="small text-muted" href="#!">Forgot password?</a>
+                  <!-- <a class="small text-muted" href="#!">Forgot password?</a> -->
                   <p class="mb-5 pb-lg-2" style="color: #393f81;">Have an account? <a href="<?php echo base_url()?>index.php/Auth/LoginController/"
                       style="color: #393f81;">Login here</a></p>
                 </form>
