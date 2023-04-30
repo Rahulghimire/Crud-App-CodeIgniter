@@ -170,7 +170,22 @@ class User extends CI_Controller {
 		}
 		
 		}
+	}
+
+	public function piechart(){
+
+		$this->db->select('province, COUNT(*) as count');
+		$this->db->from('users');
+		$this->db->group_by('province');
+		$query = $this->db->get();
+		$data = $query->result();
+
+		//var_dump($data);
+
+		//var_dump(array('data' => $data));
+
+		
+		$this->load->view('test', array('data' => $data));
 
 	}
-	
 }
