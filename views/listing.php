@@ -88,9 +88,9 @@ function myFunctionDelete(id) {
     window.location.href = "<?php echo base_url();?>index.php/User/delete/"+id;	
 } 
 }
-setTimeout(function() {
-    window.close();
-}, 5000);
+// setTimeout(function() {
+//     window.close();
+// }, 5000);
 
 </script>
 </body>

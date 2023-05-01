@@ -43,15 +43,18 @@
                 <h6>Information</h6>
                 <hr class="mt-0 mb-4">
                 <div class="row pt-1">
-                  <div class="col-6 mb-3">
+                  <div class="col-12 mb-3">
                     <h6>Email</h6>
                     <?php  $auth_user = $this->session->userdata('auth_user');
                     echo '<p class="text-muted">' .$auth_user['email'].'</p>'?>
                   </div>
-                  <div class="col-6 mb-3">
+                  <div class="col-12 mb-3">
                     <h6>Full Name</h6>
                     <?php  $auth_user = $this->session->userdata('auth_user');
                      echo '<p class="text-muted">' .$auth_user['name'] . '</p>'?></div>
+                </div>
+
+                <div class="col-12 mb-3">
                 </div>
                 <hr class="mt-0 mb-4">
                 <div class="d-flex justify-content-start">

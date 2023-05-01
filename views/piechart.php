@@ -1,32 +1,41 @@
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
+    <style>
+        body{
+            z-index:1;
+            display:flex;
+            height:100vh;
+            align-items:center;
+            justify-content:center;
+            background-color:skyblue;
+        }
+        
+    </style>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Province');
+            data.addColumn('number', 'Count');
+            <?php foreach($data as $row): ?>
+                data.addRow(['<?php echo $row->province; ?>', <?php echo $row->count; ?>]);
+            <?php endforeach; ?>
 
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
+            var options = {
+                title: 'Users According To Their Province',
+                is3D: true,
+            };
 
-        var options = {
-          title: 'Data Visualization Based on Province'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-      }
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
     </script>
-  </head>
-  <body>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
-  </body>
+</head>
+<body>
+    <div id="chart_div" style="width: 400px; height: 400px;"></div>
+</body>
 </html>

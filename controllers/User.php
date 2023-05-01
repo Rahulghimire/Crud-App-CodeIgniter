@@ -180,12 +180,13 @@ class User extends CI_Controller {
 		$query = $this->db->get();
 		$data = $query->result();
 
-		//var_dump($data);
-
-		//var_dump(array('data' => $data));
-
-		
+		$test=true;
+		if($test){
 		$this->load->view('test', array('data' => $data));
+		}
+		else{
+		$this->load->view('piechart', array('data' => $data));
+		}
 
 	}
 }
