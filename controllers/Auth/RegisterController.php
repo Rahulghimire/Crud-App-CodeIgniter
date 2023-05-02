@@ -32,10 +32,10 @@ class RegisterController extends CI_Controller {
             
             $checking=$this->UserRegModel->insert($data);
             if(!$checking){
-                $this->session->set_flashdata("status","Registration Failed!!");
+                $this->session->set_flashdata("failed","Registration Failed!!");
             }
             else{
-                $this->session->set_flashdata("status","Records Inserted Successfully!!Go to Login");
+                $this->session->set_flashdata("success","Records Inserted Successfully!!Login");
                 redirect(base_url().'index.php/Auth/LoginController/index');
             }
         }

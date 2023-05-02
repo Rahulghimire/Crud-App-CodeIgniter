@@ -7,7 +7,7 @@ function __construct(){
 public function logout(){
     $this->session->unset_userdata('authenticated');
     $this->session->unset_userdata('auth_user');
-    $this->session->set_flashdata("status","You are logged out successfully!!");
+    $this->session->set_flashdata("success","You are logged out successfully!!");
     redirect(base_url().'index.php/Auth/LoginController/');
 }
 }

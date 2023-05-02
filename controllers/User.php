@@ -105,12 +105,20 @@ class User extends CI_Controller {
 	//handle profile function
 
 	public function profile(){
-		$this->load->view("profile");
+		$this->db->select('province, COUNT(*) as count');
+		$this->db->from('users');
+		$this->db->group_by('province');
+		$query = $this->db->get();
+		$data = $query->result();
+
+		//var_dump($data);
+
+		$this->load->view("profile", array('data' => $data));
 	}
 
 	public function userEditHandler(){
-	$this->load->view("profileEdit");
-	
+		
+		$this->load->view("profileEdit");
 	}
 
 	public function handleProfileUpdate($userId){
@@ -156,7 +164,8 @@ class User extends CI_Controller {
 		//var_dump($result);
 
 		if(!$result){
-            $this->session->set_flashdata('status','Invalid Username or Password');
+            $this->session->set_flashdata('Failed','Invalid Password');
+			redirect(base_url().'index.php/User/userEditHandler');
         }
 
 		else{
@@ -165,7 +174,7 @@ class User extends CI_Controller {
 		$formArray['password']=md5($this->input->post('npassword'));
 		
 		$this->User_model->updateProfileUser($userId,$formArray);
-		$this->session->set_flashdata("success","Records Updated Successfully, Login Again With New Password");
+		$this->session->set_flashdata("Success","Records Updated Successfully, Login Again With New Password");
 		redirect(base_url().'index.php/Auth/LoginController/login');
 		}
 		

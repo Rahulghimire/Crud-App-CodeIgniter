@@ -16,6 +16,8 @@
       background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
 }
 </style>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 
@@ -53,6 +55,10 @@
                     <?php  $auth_user = $this->session->userdata('auth_user');
                      echo '<p class="text-muted">' .$auth_user['name'] . '</p>'?></div>
                 </div>
+                <div class="col-12">
+                <h6>Province Chart</h6>
+                <div id="chart_div" style="width: 335px; height: 200px;"></div>
+                </div>
 
                 <div class="col-12 mb-3">
                 </div>
@@ -72,13 +78,27 @@
   <div>
   </div>
 </section>
-<script>
-  
-  const image=document.querySelector("#user-image");
-  console.log(image);
-      // const dataUrl = image.toDataURL();
-      // console.log(dataUrl);
 
-</script>
+<script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Province');
+            data.addColumn('number', 'Count');
+            <?php foreach($data as $row): ?>
+                data.addRow(['<?php echo $row->province; ?>', <?php echo $row->count; ?>]);
+            <?php endforeach; ?>
+
+            var options = {
+                title: 'Users According To Their Province',
+                is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
 </body>
 </html>

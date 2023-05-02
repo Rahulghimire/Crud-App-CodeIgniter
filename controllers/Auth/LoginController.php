@@ -12,12 +12,12 @@ class LoginController extends CI_controller{
         $this->form_validation->set_rules('password','Password','trim|required');
 
         if($this->form_validation->run()===false){
-            $this->session->set_flashdata("status","Login Failed!!");
+            $this->session->set_flashdata("failed","Login Failed!!");
             $this->index();
         }
 
         else{
-            $this->session->set_flashdata("status","Login in successfully");
+            $this->session->set_flashdata("success","Login in successfully");
             $data=array(
                 'email'=>$this->input->post('email'),
                 'password'=>md5($this->input->post("password"))
@@ -26,7 +26,7 @@ class LoginController extends CI_controller{
         $result=$this->UserRegModel->loginUser($data);
    
         if(!$result){
-            $this->session->set_flashdata('status','Invalid Username or Password');
+            $this->session->set_flashdata('failed','Invalid Username or Password');
             $this->index();
         }
         

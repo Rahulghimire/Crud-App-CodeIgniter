@@ -41,11 +41,18 @@
               <?php
               // $data = $_SESSION; 
               // print_r($data);
-                $status = $this->session->flashdata('status');
+                $status = $this->session->flashdata('success');
+                $statusf =$this->session->flashdata('failed');
+
                 if($status){
                     echo '<div class="alert alert-success alert-dismissible fade show zindex" role="alert">' . $status . '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button></div>';
+                }
+                else if($this->session->flashdata('failed')){
+                  echo '<div class="alert alert-danger alert-dismissible fade show zindex" role="alert">' . $statusf . '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button></div>';
                 }
             ?>
                 <form action="<?php echo base_url()?>index.php/Auth/LoginController/login" method="post">
